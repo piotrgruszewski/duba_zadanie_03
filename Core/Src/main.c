@@ -96,11 +96,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (HAL_GPIO_ReadPin(BB_GPIO_Port, BB_Pin) == 0){
-		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	  }
-	  else{
-		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+	  if (!HAL_GPIO_ReadPin(BB_GPIO_Port, BB_Pin)){
+		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		  HAL_Delay(5);
+		  while (!HAL_GPIO_ReadPin(BB_GPIO_Port, BB_Pin));
 	  }
     /* USER CODE END WHILE */
 
